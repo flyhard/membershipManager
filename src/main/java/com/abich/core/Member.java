@@ -13,7 +13,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(long id, String name) {
+    public Member(String id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -1,9 +1,13 @@
 package com.abich;
 
+import com.abich.db.CouchDbAdapter;
+import com.abich.db.CouchDbUrlAdapter;
+import com.abich.db.MemberRepository;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.ektorp.CouchDbConnector;
 
 /**
  * Created by h76 on 10.12.2014.
@@ -25,7 +29,9 @@ public class MembershipManagerApplication extends Application<MembershipManagerC
 
     @Override
     public void run(MembershipManagerConfiguration configuration, Environment environment) {
-        MemberResource memberResource = new MemberResource();
+        CouchDbConnector dbConnector = new CouchDbUrlAdapter().getConnector(configuration.getCouchDbUrl(), configuration.getDbName());
+        MemberRepository memberRepository = new MemberRepository(dbConnector);
+        MemberResource memberResource = new MemberResource(memberRepository);
         MembershipManagerHealthCheck membershipManagerHealthCheck = new MembershipManagerHealthCheck();
 
         environment.healthChecks().register("base",membershipManagerHealthCheck);
