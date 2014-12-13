@@ -10,7 +10,6 @@ import java.net.URL;
  * Created by h76 on 10.12.2014.
  */
 public class MembershipManagerConfiguration extends Configuration {
-    @NotEmpty
     @JsonProperty
     private URL couchDbUrl;
     @NotEmpty

@@ -7,8 +7,10 @@ import com.codahale.metrics.annotation.Timed;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.awt.*;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@Path("/member/{id}")
+@Path("/member")
 @Produces(MediaType.APPLICATION_JSON)
 public class MemberResource {
 
@@ -19,6 +21,7 @@ public class MemberResource {
     }
 
     @GET
+    @Path("/{id}")
     @Timed
     public Member getMember(@PathParam("id") String id) {
         Member member = memberRepository.get(id);
@@ -26,6 +29,7 @@ public class MemberResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Timed
     public Member createMember(@Valid Member member){
         memberRepository.add(member);
