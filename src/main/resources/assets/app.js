@@ -1,22 +1,27 @@
-var membershipManager = angular.module("MembershipManager", ['ngResource', 'ngRoute']);
+var membershipManager = angular.module('MembershipManager', ['ngResource', 'ngRoute']);
 
 membershipManager.controller('MembershipCtrl'
-    , ["$scope", "$resource", "$route", "Member"
-        , function ($scope, $resource, $route, Member) {
-            //var memberResource = $resource("/member/:memberId", {memberId: '@id'});
-            //$scope.member = memberResource.get({memberId: 1});
+    , function ($scope, $resource, Member) {
+        var member = Member.get({ id: $scope.id }, function() {
+            console.log(member);
+        }); // get() returns a single entry
 
-            $scope.save = function (member) {
-                if ($scope.member._id) {
-                    Post.update({_id: $scope.member._id}, $scope.member);
-                } else {
-                    $scope.member.$save().then(function (response) {
-                        $scope.member.push(response)
-                    });
-                }
-                $scope.member = new Member();
-                $scope.editing = false;
-            }
-        }
-    ]
+        var members = Member.query(function() {
+            console.log(members);
+        }); //query() returns all the entries
+
+        $scope.member = new Member(); //You can instantiate resource class
+
+        $scope.member.name = 'some data';
+
+        Member.save($scope.member, function() {
+            //data saved. do something here.
+        }); //saves an entry. Assuming $scope.entry is the Entry object
+
+        $scope.addMember = function() { //create a new movie. Issues a POST to /api/movies
+            $scope.member.$save(function () {
+                //$state.go('movies'); // on success go back to home i.e. movies state.
+            });
+        };
+    }
 );

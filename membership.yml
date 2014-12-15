@@ -1,2 +1,2 @@
-couchDbUrl: http://10.0.0.6:49153
+couchDbUrl: http://192.168.1.8:49153
 dbName: membership
