@@ -7,8 +7,6 @@ import com.codahale.metrics.annotation.Timed;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.awt.*;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/member")
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,15 +22,37 @@ public class MemberResource {
     @Path("/{id}")
     @Timed
     public Member getMember(@PathParam("id") String id) {
-        Member member = memberRepository.get(id);
-        return member;
+        return memberRepository.get(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Timed
-    public Member createMember(@Valid Member member){
-        memberRepository.add(member);
+    public Member createMember(@Valid Member member) {
+        if (member.getId() != null && memberRepository.contains(member.getId())) {
+            Member orgMember = memberRepository.get(member.getId());
+            orgMember.setName(member.getName());
+            memberRepository.update(orgMember);
+            member = orgMember;
+        } else {
+            memberRepository.add(member);
+        }
+        return member;
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    @Timed
+    public Member createMember(@Valid Member member, @PathParam("id") String id) {
+        if (member.getId() != null && memberRepository.contains(id)) {
+            Member orgMember = memberRepository.get(id);
+            orgMember.setName(member.getName());
+            memberRepository.update(orgMember);
+            member = orgMember;
+        } else {
+            memberRepository.add(member);
+        }
         return member;
     }
 }
