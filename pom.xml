@@ -35,14 +35,20 @@
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.ektorp</groupId>
-            <artifactId>org.ektorp</artifactId>
-            <version>${ektorp.version}</version>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo-java-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongojack</groupId>
+            <artifactId>mongojack</artifactId>
+            <version>${mongojack.version}</version>
         </dependency>
     </dependencies>
     <properties>
         <dropwizard.version>0.8.0-rc1</dropwizard.version>
-        <ektorp.version>1.3.0</ektorp.version>
+        <mongo-java-driver.version>2.6.5</mongo-java-driver.version>
+        <mongojack.version>2.1.0</mongojack.version>
     </properties>
 
 </project>

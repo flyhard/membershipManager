@@ -1,13 +1,15 @@
 package com.abich.db;
 
 import com.abich.core.Member;
-import org.ektorp.CouchDbConnector;
-import org.ektorp.support.CouchDbRepositorySupport;
 
-public class MemberRepository extends CouchDbRepositorySupport<Member> {
+import java.util.Optional;
 
-    public MemberRepository(CouchDbConnector db) {
-        super(Member.class, db);
-    }
+public interface MemberRepository {
+    Optional<Member> get(String id);
 
+    void add(Member member);
+
+    void update(Member orgMember);
+
+    boolean contains(String id);
 }

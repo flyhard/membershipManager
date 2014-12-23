@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class MemberResource {
 
+
     private final MemberRepository memberRepository;
 
     public MemberResource(final MemberRepository memberRepository) {
@@ -22,7 +23,7 @@ public class MemberResource {
     @Path("/{id}")
     @Timed
     public Member getMember(@PathParam("id") String id) {
-        return memberRepository.get(id);
+        return memberRepository.get(id).get();
     }
 
     @POST
@@ -30,7 +31,7 @@ public class MemberResource {
     @Timed
     public Member createMember(@Valid Member member) {
         if (member.getId() != null && memberRepository.contains(member.getId())) {
-            Member orgMember = memberRepository.get(member.getId());
+            Member orgMember = memberRepository.get(member.getId()).get();
             orgMember.setName(member.getName());
             memberRepository.update(orgMember);
             member = orgMember;
@@ -46,7 +47,7 @@ public class MemberResource {
     @Timed
     public Member createMember(@Valid Member member, @PathParam("id") String id) {
         if (member.getId() != null && memberRepository.contains(id)) {
-            Member orgMember = memberRepository.get(id);
+            Member orgMember = memberRepository.get(id).get();
             orgMember.setName(member.getName());
             memberRepository.update(orgMember);
             member = orgMember;
