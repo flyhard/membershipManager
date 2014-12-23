@@ -44,11 +44,27 @@
             <artifactId>mongojack</artifactId>
             <version>${mongojack.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <properties>
         <dropwizard.version>0.8.0-rc1</dropwizard.version>
         <mongo-java-driver.version>2.6.5</mongo-java-driver.version>
         <mongojack.version>2.1.0</mongojack.version>
+        <jackson.version>2.4.3</jackson.version>
     </properties>
 
 </project>

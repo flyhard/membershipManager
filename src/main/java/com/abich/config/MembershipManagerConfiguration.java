@@ -10,18 +10,18 @@ public class MembershipManagerConfiguration extends Configuration {
 
     @Valid
     @NotNull
-    private DbConfigurationServiceFactory dbConfigurationServiceFactory;
+    private DbConfigurationServiceFactory db;
 
     public MembershipManagerConfiguration() {
     }
 
-    @JsonProperty("dbConfigurationService")
+    @JsonProperty("db")
     public DbConfigurationServiceFactory getDbConfigurationServiceFactory() {
-        return dbConfigurationServiceFactory;
+        return db;
     }
 
-    @JsonProperty("dbConfigurationService")
+    @JsonProperty("db")
     public void setDbConfigurationServiceFactory(final DbConfigurationServiceFactory dbConfigurationServiceFactory) {
-        this.dbConfigurationServiceFactory = dbConfigurationServiceFactory;
+        this.db = dbConfigurationServiceFactory;
     }
 }

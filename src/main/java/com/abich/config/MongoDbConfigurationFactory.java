@@ -4,20 +4,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+
 @JsonTypeName("mongo")
-public class DbConfigurationFactory implements DbConfigurationServiceFactory {
+public class MongoDbConfigurationFactory implements DbConfigurationServiceFactory {
 
 
     @NotEmpty
     String host;
     @NotEmpty
     String name;
-    @NotEmpty
+    @NotNull
     Integer port;
 
     @Override
     public DbConfigurationService build() {
-        return new MongoDbConfigurationService();
+        return new MongoDbConfigurationService(name, host, port);
     }
 
     @JsonProperty
