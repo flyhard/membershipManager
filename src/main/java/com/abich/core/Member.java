@@ -18,7 +18,7 @@ public class Member {
     @JsonProperty
     private String name;
     @JsonProperty
-    private EmailAddress emailAddress;
+    private String emailAddress;
     @JsonProperty
     private List<EmailAddress> alternativeAddresses;
 
@@ -30,7 +30,7 @@ public class Member {
         this(id, name, null, Lists.emptyList());
     }
 
-    public Member(final String id, final String name, final EmailAddress emailAddress, final List<EmailAddress> alternativeAddresses) {
+    public Member(final String id, final String name, final String emailAddress, final List<EmailAddress> alternativeAddresses) {
         this.id = id;
         this.name = name;
         this.emailAddress = emailAddress;
@@ -45,7 +45,7 @@ public class Member {
         return name;
     }
 
-    public EmailAddress getEmailAddress() {
+    public String getEmailAddress() {
         return emailAddress;
     }
 

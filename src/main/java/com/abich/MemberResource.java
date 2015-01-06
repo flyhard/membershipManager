@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Optional;
 
 @Path("/member")
 @Produces(MediaType.APPLICATION_JSON)
@@ -56,7 +57,13 @@ public class MemberResource {
     @Timed
     public Member createMember(@Valid Member member, @PathParam("id") String id) {
         if (member.getId() != null && memberRepository.contains(id)) {
-            Member orgMember = new MemberBuilder().clone(memberRepository.get(id).get()).setName(member.getName()).createMember();
+            Optional<Member> memberOptional = memberRepository.get(id);
+            Member dbMember = memberOptional.get();
+            Member orgMember = new MemberBuilder()
+                    .clone(dbMember)
+                    .setName(member.getName())
+                    .setEmailAddress(member.getEmailAddress())
+                    .createMember();
             memberRepository.update(orgMember);
             member = orgMember;
         } else {

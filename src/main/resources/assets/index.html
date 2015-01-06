@@ -30,8 +30,8 @@
                 <input id="email" class="form-control" ng-model="member.emailAddress" type="email"/>
             </div>
 
-            <button type="submit" class="btn btn-primary" ng-click="addMember()"><i
-                    class="glyphicon glyphicon-plus"></i>Add
+            <button type="submit" class="btn btn-primary" ng-click="saveMember()"><i
+                    class="glyphicon glyphicon-plus">Save</i>
             </button>
         </form>
     </div>
@@ -43,14 +43,14 @@
     <div class="panel-body">
         <table class="table table-striped">
             <tr>
-                <th>ID</th>
+                <th class="hidden">ID</th>
                 <th>Navn</th>
                 <th>eMail</th>
                 <th></th>
             </tr>
             <tr ng-repeat="member in members">
-                <td>{{member._id}}</td>
-                <td>{{member.name}}</td>
+                <td class="hidden">{{member._id}}</td>
+                <td><a ng-click="editMember(member)">{{member.name}}</a></td>
                 <td>{{member.emailAddress}}</td>
                 <td>
                     <button type="button" class="btn btn-danger" ng-click="removeMember(member)">

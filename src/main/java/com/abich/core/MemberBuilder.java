@@ -10,14 +10,14 @@ import java.util.List;
 public class MemberBuilder {
     private String id = null;
     private String name = null;
-    private EmailAddressBuilder emailAddressBuilder = null;
+    private String emailAddress = null;
     private List<EmailAddressBuilder> alternativeAddresses = Lists.newArrayList();
 
     public MemberBuilder clone(Member member) {
         id = member.getId();
         name = member.getName();
         if (member.getEmailAddress() != null) {
-            emailAddressBuilder = new EmailAddressBuilder().setEmail(member.getEmailAddress().getEmail());
+            emailAddress = member.getEmailAddress();
         }
         alternativeAddresses = Lists.transform(member.getAlternativeAddresses(), new Function<EmailAddress, EmailAddressBuilder>() {
             @Nullable
@@ -39,8 +39,8 @@ public class MemberBuilder {
         return this;
     }
 
-    public MemberBuilder setEmailAddressBuilder(final EmailAddressBuilder emailAddressBuilder) {
-        this.emailAddressBuilder = emailAddressBuilder;
+    public MemberBuilder setEmailAddress(final String emailAddress) {
+        this.emailAddress = emailAddress;
         return this;
     }
 
@@ -58,10 +58,6 @@ public class MemberBuilder {
                 return addressBuilder.createEmailAddress();
             }
         });
-        EmailAddress emailAddress = null;
-        if (emailAddressBuilder != null) {
-            emailAddress = emailAddressBuilder.createEmailAddress();
-        }
         return new Member(id, name, emailAddress, emailAddresses);
     }
 }

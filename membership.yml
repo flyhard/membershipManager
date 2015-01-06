@@ -11,6 +11,8 @@ server:
 
 logging:
   level: INFO
+  loggers:
+    com.abich: DEBUG
   appenders:
     - type: console
       threshold: ALL
