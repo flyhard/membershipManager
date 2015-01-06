@@ -11,7 +11,7 @@ import java.util.List;
  * Created by perab_000 on 11.12.2014.
  */
 public class Member {
-    @JsonProperty
+    @JsonProperty("_id")
     @ObjectId
     private String id;
     @Length(min = 2)

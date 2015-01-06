@@ -2,21 +2,12 @@ var membershipManager = angular.module('MembershipManager', ['ngResource', 'ngRo
 
 membershipManager.controller('MembershipCtrl'
     , function ($scope, Member) {
-        var member = Member.get({ id: $scope.id }, function() {
-            console.log(member);
-        }); // get() returns a single entry
+        //var member = Member.get({ id: $scope.id }, function() {
+        //    console.log(member);
+        //}); // get() returns a single entry
 
-        var members = Member.query(function() {
-            console.log(members);
+        $scope.members = Member.query(function () {
         }); //query() returns all the entries
-
-        $scope.member = new Member(); //You can instantiate resource class
-
-        $scope.member.name = 'some data';
-
-        Member.save($scope.member, function() {
-            //data saved. do something here.
-        }); //saves an entry. Assuming $scope.entry is the Entry object
 
         $scope.addMember = function() { //create a new movie. Issues a POST to /api/movies
             var member = $scope.member.$save({id: $scope.member._id}, function () {
@@ -24,7 +15,13 @@ membershipManager.controller('MembershipCtrl'
             });
             member.then(function (data) {
                 console.log(data);
-            })
+            });
+            $scope.members = Member.query(function () {
+                console.log(members);
+            }); //query() returns all the entries
         };
+        $scope.removeMember = function (member) {
+            Member.remove(member);
+        }
     }
 );
