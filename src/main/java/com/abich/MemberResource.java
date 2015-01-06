@@ -41,7 +41,9 @@ public class MemberResource {
     public Member createMember(@Valid Member member) {
         if (member.getId() != null && memberRepository.contains(member.getId())) {
             Member orgMember = memberRepository.get(member.getId()).get();
-            MemberBuilder memberBuilder = new MemberBuilder().clone(orgMember).setName(member.getName());
+            MemberBuilder memberBuilder = new MemberBuilder()
+                    .clone(orgMember
+                    ).setName(member.getName());
             Member member1 = memberBuilder.createMember();
             memberRepository.update(member1);
             member = member1;
@@ -63,6 +65,7 @@ public class MemberResource {
                     .clone(dbMember)
                     .setName(member.getName())
                     .setEmailAddress(member.getEmailAddress())
+                    .setPhone(member.getPhone())
                     .createMember();
             memberRepository.update(orgMember);
             member = orgMember;

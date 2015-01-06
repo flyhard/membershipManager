@@ -12,13 +12,13 @@ public class MemberBuilder {
     private String name = null;
     private String emailAddress = null;
     private List<EmailAddressBuilder> alternativeAddresses = Lists.newArrayList();
+    private String phone;
 
     public MemberBuilder clone(Member member) {
         id = member.getId();
         name = member.getName();
-        if (member.getEmailAddress() != null) {
-            emailAddress = member.getEmailAddress();
-        }
+        emailAddress = member.getEmailAddress();
+        phone = member.getPhone();
         alternativeAddresses = Lists.transform(member.getAlternativeAddresses(), new Function<EmailAddress, EmailAddressBuilder>() {
             @Nullable
             @Override
@@ -58,6 +58,11 @@ public class MemberBuilder {
                 return addressBuilder.createEmailAddress();
             }
         });
-        return new Member(id, name, emailAddress, emailAddresses);
+        return new Member(id, name, emailAddress, emailAddresses, phone);
+    }
+
+    public MemberBuilder setPhone(final String phone) {
+        this.phone = phone;
+        return this;
     }
 }

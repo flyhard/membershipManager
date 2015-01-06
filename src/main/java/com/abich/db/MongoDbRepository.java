@@ -4,7 +4,10 @@ import com.abich.core.Member;
 import com.abich.core.MemberBuilder;
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
-import org.mongojack.*;
+import org.mongojack.DBCursor;
+import org.mongojack.DBQuery;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.WriteResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,13 +59,12 @@ public class MongoDbRepository implements MemberRepository {
         DBCursor<Member> members = getMemberCollection().find(query);
         if (members.hasNext()) {
             Member member = members.next();
-            DBUpdate.Builder update = DBUpdate
-                    .push("name", orgMember.getName())
-                    .push("emailAddress", orgMember.getEmailAddress());
             Member updatedMember = new MemberBuilder()
                     .clone(member)
                     .setName(orgMember.getName())
-                    .setEmailAddress(orgMember.getEmailAddress()).createMember();
+                    .setEmailAddress(orgMember.getEmailAddress())
+                    .setPhone(orgMember.getPhone())
+                    .createMember();
             WriteResult<Member, String> writeResult = getMemberCollection()
                     .update(query, updatedMember);
             LOGGER.debug("Updated {} members.", writeResult.getN());
@@ -84,6 +86,6 @@ public class MongoDbRepository implements MemberRepository {
     @Override
     public void delete(final String id) {
         WriteResult<Member, String> writeResult = getMemberCollection().remove(DBQuery.is(ID, id));
-        LOGGER.info("Deleted {} members.", writeResult.getN());
+        LOGGER.debug("Deleted {} members.", writeResult.getN());
     }
 }
