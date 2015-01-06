@@ -1,8 +1,18 @@
 db:
   type: mongo
-  host: 192.168.59.104
+  host: 192.168.56.101
   port: 49153
   name: members
 
 server:
   rootPath: /api/*
+  requestLog:
+      timeZone: UTC
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout

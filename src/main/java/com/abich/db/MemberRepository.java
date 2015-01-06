@@ -2,6 +2,7 @@ package com.abich.db;
 
 import com.abich.core.Member;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository {
@@ -12,4 +13,6 @@ public interface MemberRepository {
     void update(Member orgMember);
 
     boolean contains(String id);
+
+    List<Member> getAll();
 }

@@ -1,6 +1,8 @@
 package com.abich.db;
 
 import com.abich.core.Member;
+import com.abich.core.MemberBuilder;
+import com.google.common.collect.Lists;
 import com.mongodb.DB;
 import org.mongojack.DBCursor;
 import org.mongojack.DBUpdate;
@@ -9,6 +11,7 @@ import org.mongojack.WriteResult;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 public class MongoDbRepository implements MemberRepository {
@@ -40,9 +43,9 @@ public class MongoDbRepository implements MemberRepository {
      */
     @Override
     public void add(@NotNull final Member member) {
-        member.setId(null);
-        WriteResult<Member, String> writeResult = getMemberCollection().insert(member);
-        member.setId(writeResult.getSavedId());
+        MemberBuilder memberBuilder = new MemberBuilder()
+                .clone(member).setId(null);
+        WriteResult<Member, String> writeResult = getMemberCollection().insert(memberBuilder.createMember());
     }
 
     @Override
@@ -50,12 +53,19 @@ public class MongoDbRepository implements MemberRepository {
         DBCursor<Member> members = getMemberCollection().find().is("id", orgMember.getId());
         if (members.hasNext()) {
             Member member = members.next();
-            getMemberCollection().updateById(orgMember.getId(), DBUpdate.push("name", orgMember.getName()));
+            WriteResult<Member, String> writeResult = getMemberCollection().updateById(orgMember.getId(), DBUpdate.push("name", orgMember.getName()));
         }
     }
 
     @Override
     public boolean contains(final String id) {
-        return getMemberCollection().find().is("id", id)!=null;
+        return getMemberCollection().find().is("id", id) != null;
+    }
+
+    @Override
+    public List<Member> getAll() {
+        DBCursor<Member> memberDBCursor = getMemberCollection().find();
+
+        return Lists.newArrayList((Iterable<Member>) memberDBCursor);
     }
 }
