@@ -15,4 +15,6 @@ public interface MemberRepository {
     boolean contains(String id);
 
     List<Member> getAll();
+
+    void delete(String id);
 }

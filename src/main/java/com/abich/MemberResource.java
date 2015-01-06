@@ -64,4 +64,12 @@ public class MemberResource {
         }
         return member;
     }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    @Timed
+    public void deleteMember(@PathParam("id") String id) {
+        memberRepository.delete(id);
+    }
 }
