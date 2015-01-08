@@ -1,0 +1,27 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        Memberlist
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <tr>
+                <th class="hidden">ID</th>
+                <th>Navn</th>
+                <th>Phone</th>
+                <th>eMail</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="member in members|orderBy: ['name','phone']">
+                <td class="hidden">{{member._id}}</td>
+                <td><a ng-click="editMember(member)">{{member.name}}</a></td>
+                <td>{{member.phone}}</td>
+                <td>{{member.emailAddress}}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" ng-click="removeMember(member)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

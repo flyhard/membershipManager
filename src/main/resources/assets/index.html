@@ -7,66 +7,46 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="app.css">
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-resource.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
     <script src="app.js"></script>
-    <script src="member.js"></script>
+    <script src="services/MemberService.js"></script>
+    <script src="controllers/MemberListController.js"></script>
+    <script src="controllers/MemberEditController.js"></script>
 </head>
 <body ng-controller="MembershipCtrl">
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        Add member
-    </div>
-    <div class="panel-body">
-        <form ng-submit="save(member)">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input id="name" ng-model="member.name" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input id="phone" ng-model="member.phone" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label for="email">eMail:</label>
-                <input id="email" class="form-control" ng-model="member.emailAddress" type="email"/>
-            </div>
-
-            <button type="submit" class="btn btn-primary" ng-click="saveMember()"><i
-                    class="glyphicon glyphicon-plus">Save</i>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-        </form>
+            <a class="navbar-brand" href="#">Membership tracker</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: isActive('/addMember')}"><a href="#/addMember">Add member <span class="sr-only">(current)</span></a>
+                </li>
+                <li ng-class="{active: isActive('/showMembers')}"><a href="#/showMembers">Show members</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/">Home</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-</div>
-<div class="panel panel-info">
-    <div class="panel-heading">
-        Memberlist
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped">
-            <tr>
-                <th class="hidden">ID</th>
-                <th>Navn</th>
-                <th>Phone</th>
-                <th>eMail</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="member in members">
-                <td class="hidden">{{member._id}}</td>
-                <td><a ng-click="editMember(member)">{{member.name}}</a></td>
-                <td>{{member.phone}}</td>
-                <td>{{member.emailAddress}}</td>
-                <td>
-                    <button type="button" class="btn btn-danger" ng-click="removeMember(member)">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div ng-view></div>
 
 </body>
 </html>

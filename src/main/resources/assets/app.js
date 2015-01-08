@@ -1,35 +1,36 @@
 var membershipManager = angular.module('MembershipManager', ['ngResource', 'ngRoute']);
 
+membershipManager.config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.html5Mode(false);
+}]);
+
+membershipManager.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider
+        .when("/showMembers", {
+            templateUrl: 'views/showMembers.html',
+            controller: 'MemberListController'
+        })
+        .when("/addMember", {
+            templateUrl: 'views/addMember.html',
+            controller: 'MemberEditController'
+        })
+        .when("/editMember/:id", {
+            templateUrl: 'views/addMember.html',
+            controller: 'MemberEditController'
+        })
+        .otherwise({
+            redirectTo: '/showMembers'
+        });
+}]);
+
 membershipManager.controller('MembershipCtrl'
-    , function ($scope, Member) {
+    , ['$scope', 'Member', 'MemberService', '$location', function ($scope, Member, MemberService, $location) {
         //var member = Member.get({ id: $scope.id }, function() {
         //    console.log(member);
         //}); // get() returns a single entry
-
-        $scope.members = Member.query(function () {
-        }); //query() returns all the entries
-
-        $scope.saveMember = function () { //create a new movie. Issues a POST to /api/movies
-            var member = $scope.member.$save({id: $scope.member._id}, function () {
-                //$state.go('movies'); // on success go back to home i.e. movies state.
-            });
-            member.then(function (data) {
-                console.log(data);
-                $scope.members = Member.query(function () {
-                    //console.log(members);
-                }); //query() returns all the entries
-            });
-        };
-        $scope.removeMember = function (member) {
-            Member.remove({id: member._id}, function () {
-                $scope.members = Member.query(function () {
-                }); //query() returns all the entries
-            });
+        $scope.isActive = function (viewLocation) {
+            return viewLocation === $location.path();
         };
 
-        $scope.editMember = function (member) {
-            $scope.member = member;
-            $scope.add = false;
-        };
-    }
+    }]
 );
