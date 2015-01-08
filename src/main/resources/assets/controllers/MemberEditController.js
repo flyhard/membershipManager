@@ -20,4 +20,8 @@ membershipManager.controller('MemberEditController', [
                     $location.path("/showMembers");
                 });
         };
+
+        $scope.cancelEditMember = function () {
+            $location.path("/showMembers");
+        };
     }]);
