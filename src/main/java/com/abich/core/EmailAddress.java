@@ -1,6 +1,8 @@
 package com.abich.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;
 
@@ -22,5 +24,12 @@ public class EmailAddress {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("email", email)
+                .toString();
     }
 }

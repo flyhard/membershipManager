@@ -1,6 +1,8 @@
 package com.abich.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import org.assertj.core.util.Lists;
 import org.hibernate.validator.constraints.Length;
 import org.mongojack.ObjectId;
@@ -59,5 +61,16 @@ public class Member {
 
     public String getPhone() {
         return phone;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("emailAddress", emailAddress)
+                .add("alternativeAddresses", alternativeAddresses)
+                .add("phone", phone)
+                .toString();
     }
 }

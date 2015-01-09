@@ -24,4 +24,13 @@ membershipManager.controller('MemberEditController', [
         $scope.cancelEditMember = function () {
             $location.path("/showMembers");
         };
+
+        $scope.moveAddress = function () {
+            if ($scope.member.alternativeAddresses == null) {
+                $scope.member.alternativeAddresses = [];
+            }
+            $scope.$applyAsync(function () {
+                $scope.member.alternativeAddresses.push({email: $scope.newEmail});
+            });
+        }
     }]);

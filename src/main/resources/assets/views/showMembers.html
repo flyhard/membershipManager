@@ -9,6 +9,7 @@
                 <th>Navn</th>
                 <th>Phone</th>
                 <th>eMail</th>
+                <th>other eMail adresses</th>
                 <th></th>
             </tr>
             <tr ng-repeat="member in members|orderBy: ['name','phone']">
@@ -16,6 +17,11 @@
                 <td><a ng-click="editMember(member)">{{member.name}}</a></td>
                 <td>{{member.phone}}</td>
                 <td>{{member.emailAddress}}</td>
+                <td>
+                    <ul>
+                        <li ng-repeat="addr in member.alternativeAddresses">{{addr.email}}</li>
+                    </ul>
+                </td>
                 <td>
                     <button type="button" class="btn btn-danger" ng-click="removeMember(member)">
                         <i class="glyphicon glyphicon-trash"></i>

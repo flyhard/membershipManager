@@ -18,12 +18,32 @@
                     <label for="email">eMail:</label>
                     <input id="email" class="form-control" ng-model="member.emailAddress" type="email"/>
                 </div>
-
+                <div class="form-group">
+                    <label for="alternativEmail">More eMail adresses</label>
+                    <select id="alternativEmail" size="3" ng-model="selectedAlternatives"
+                            ng-options="alternative.name for alternative in member.alternativeAddresses">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <ng-form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label for="newEmail" class="input-group-addon">Additional eMail:</label>
+                                <input id="newEmail" ng-model="newEmail" type="email" class="form-control"
+                                       placeholder="eMail address">
+                            </div>
+                            <button class="btn" ng-click="moveAddress()">
+                                <i class="glyphicon glyphicon-plus">Add</i>
+                            </button>
+                        </div>
+                    </ng-form>
+                </div>
                 <button type="submit" class="btn btn-primary" ng-click="saveMember()"><i
                         class="glyphicon glyphicon-plus">Save</i>
                 </button>
                 <button type="button" class="btn" ng-click="cancelEditMember()">Cancel</button>
             </fieldset>
         </form>
+        <div>{{member|json}}</div>
     </div>
 </div>

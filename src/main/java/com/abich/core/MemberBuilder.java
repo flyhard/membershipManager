@@ -44,6 +44,15 @@ public class MemberBuilder {
         return this;
     }
 
+    public MemberBuilder cloneAlternativeAddresses(List<EmailAddress> alternativeAddresses) {
+        this.alternativeAddresses = Lists.newArrayList();
+        for (EmailAddress alternativeAddress : alternativeAddresses) {
+            EmailAddressBuilder emailAddressBuilder = new EmailAddressBuilder().clone(alternativeAddress);
+            this.alternativeAddresses.add(emailAddressBuilder);
+        }
+        return this;
+    }
+
     public MemberBuilder setAlternativeAddresses(EmailAddressBuilder... alternativeAddresses) {
         this.alternativeAddresses = Lists.newArrayList(alternativeAddresses);
 
