@@ -10,6 +10,7 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 RUN apt-get install -y oracle-java8-installer
 RUN apt-get upgrade -y
 ADD src pom.xml *.yml /usr/src/app/
+WORKDIR /usr/src/app
 RUN apt-get install -y oracle-java8-set-default maven && \
     mvn install && \
     apt-get purge -y maven && \
