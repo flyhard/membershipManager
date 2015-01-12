@@ -13,5 +13,6 @@ RUN apt-get update && \
     mkdir -p /opt/app && \
     mv target/membership-register*.jar /opt/app && \
     rm -rf target
-
-CMD ['java','-jar','/opt/app/memebership*.jar']
+    
+WORKDIR /opt/app
+CMD java -jar /opt/app/memebership*.jar
