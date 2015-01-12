@@ -15,4 +15,4 @@ RUN apt-get update && \
     rm -rf target
     
 WORKDIR /opt/app
-CMD java -jar /opt/app/memebership*.jar
+CMD java -jar /opt/app/membership*.jar
