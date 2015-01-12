@@ -11,4 +11,3 @@ RUN apt-get install -y oracle-java8-installer
 RUN apt-get upgrade -y
 RUN apt-get install oracle-java8-set-default
 
-RUN java --version
