@@ -12,7 +12,10 @@ RUN apt-get update && \
     rm -rf ~/.m2 && \
     mkdir -p /opt/app && \
     mv target/membership-register*.jar /opt/app && \
-    rm -rf target
-    
+    rm -rf target && \
+    update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+
+RUN java -version
+
 WORKDIR /opt/app
 CMD java -jar /opt/app/membership*.jar
