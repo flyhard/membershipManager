@@ -2,7 +2,7 @@ FROM java:8
 MAINTAINER Per Abich <per.abich@gmail.com>
 
 COPY pom.xml *.yml /usr/src/app/
-COPY src/ /usr/src/app
+COPY src/ /usr/src/app/src
 WORKDIR /usr/src/app
 RUN apt-get update && \
     apt-get install -y maven && \
