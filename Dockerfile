@@ -18,4 +18,4 @@ RUN apt-get update && \
 RUN java -version
 
 WORKDIR /opt/app
-CMD java -jar /opt/app/membership*.jar
+CMD java -jar /opt/app/membership*.jar server
