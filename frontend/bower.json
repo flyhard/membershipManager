@@ -1,0 +1,24 @@
+{
+  "name": "membershipManager",
+  "version": "0.0.0",
+  "homepage": "https://github.com/flyhard/membershipManager",
+  "main": "src/main/resource/assets/index.html",
+  "authors": [
+    "Per Abich <per.abich@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true,
+  "dependencies": {
+    "angular-resource": "~1.3.8",
+    "angular": "~1.3.8",
+    "angular-route": "~1.3.8",
+    "bootstrap": "~3.3.1"
+  }
+}

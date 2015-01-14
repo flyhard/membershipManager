@@ -1,0 +1,1 @@
+web: java -jar -Ddw.server.connector.port=$PORT /app/target/membership-register-0.1-SNAPSHOT.jar server /app/membership.yml

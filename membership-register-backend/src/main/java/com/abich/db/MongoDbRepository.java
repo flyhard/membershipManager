@@ -29,7 +29,7 @@ public class MongoDbRepository implements MemberRepository {
 
     @Override
     public Optional<Member> get(final String id) {
-        org.mongojack.DBCursor<Member> cursor = getMemberCollection().find().is(ID, id);
+        DBCursor<Member> cursor = getMemberCollection().find().is(ID, id);
         if (cursor.hasNext()) {
             return Optional.of(cursor.next());
         }
