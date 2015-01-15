@@ -20,8 +20,15 @@
                 </div>
                 <div class="form-group">
                     <label for="alternativEmail">More eMail adresses</label>
-                    <select id="alternativEmail" size="3" ng-model="selectedAlternatives"
-                            ng-options="alternative.name for alternative in member.alternativeAddresses">
+                    <button class="pull-right btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove
+                        selected
+                    </button>
+                    <button class="pull-right btn">Make primary</button>
+                    <select id="alternativEmail"
+                            class="form-control"
+                            ng-model="selectedAlternatives"
+                            size="4"
+                            ng-options="alternative.email for alternative in member.alternativeAddresses |filter: primary: false">
                     </select>
                 </div>
                 <div class="form-group">
@@ -33,13 +40,15 @@
                                        placeholder="eMail address">
                             </div>
                             <button class="btn" ng-click="moveAddress()">
-                                <i class="glyphicon glyphicon-plus">Add</i>
+                                <i class="glyphicon glyphicon-plus"></i>
+                                Add
                             </button>
                         </div>
                     </ng-form>
                 </div>
                 <button type="submit" class="btn btn-primary" ng-click="saveMember()"><i
-                        class="glyphicon glyphicon-plus">Save</i>
+                        class="glyphicon glyphicon-plus"></i>
+                    Save
                 </button>
                 <button type="button" class="btn" ng-click="cancelEditMember()">Cancel</button>
             </fieldset>

@@ -63,6 +63,7 @@ public class MongoDbRepository implements MemberRepository {
                     .clone(member)
                     .setName(orgMember.getName())
                     .setEmailAddress(orgMember.getEmailAddress())
+                    .cloneAlternativeAddresses(orgMember.getAlternativeAddresses())
                     .setPhone(orgMember.getPhone())
                     .createMember();
             WriteResult<Member, String> writeResult = getMemberCollection()

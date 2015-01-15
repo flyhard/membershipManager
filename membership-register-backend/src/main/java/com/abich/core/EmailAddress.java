@@ -2,7 +2,6 @@ package com.abich.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;
 
@@ -14,12 +13,14 @@ public class EmailAddress {
     @NotNull
     private String email;
 
+    private boolean primary;
+
     public EmailAddress() {
     }
 
-    public EmailAddress(final String email) {
-
+    public EmailAddress(final String email, final boolean primary) {
         this.email = email;
+        this.primary = primary;
     }
 
     public String getEmail() {
@@ -31,5 +32,9 @@ public class EmailAddress {
         return MoreObjects.toStringHelper(this)
                 .add("email", email)
                 .toString();
+    }
+
+    public boolean isPrimary() {
+        return primary;
     }
 }

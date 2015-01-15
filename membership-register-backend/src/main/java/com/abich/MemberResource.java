@@ -76,14 +76,15 @@ public class MemberResource {
             newMember = false;
             Optional<Member> memberOptional = memberRepository.get(id);
             Member dbMember = memberOptional.get();
+            List<EmailAddress> alternativeAddresses = member.getAlternativeAddresses();
             Member updatedMember = new MemberBuilder()
                     .clone(dbMember)
                     .setName(member.getName())
                     .setEmailAddress(member.getEmailAddress())
                     .setPhone(member.getPhone())
-                    .cloneAlternativeAddresses(member.getAlternativeAddresses())
+                    .cloneAlternativeAddresses(alternativeAddresses)
                     .createMember();
-            LOGGER.debug("Updating member: {}",updatedMember);
+            LOGGER.debug("Updating member: {}", updatedMember);
             memberRepository.update(updatedMember);
             member = updatedMember;
         } else {
