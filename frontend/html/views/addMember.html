@@ -19,17 +19,23 @@
                     <input id="email" class="form-control" ng-model="member.emailAddress" type="email"/>
                 </div>
                 <div class="form-group">
-                    <label for="alternativEmail">More eMail adresses</label>
-                    <button class="pull-right btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove
-                        selected
-                    </button>
-                    <button class="pull-right btn">Make primary</button>
-                    <select id="alternativEmail"
-                            class="form-control"
-                            ng-model="selectedAlternatives"
-                            size="4"
-                            ng-options="alternative.email for alternative in member.alternativeAddresses |filter: primary: false">
-                    </select>
+                    <label class="control-label">More emails</label>
+
+                    <div class="container-fluid">
+                        <div class="row"
+                             ng-repeat="alternative in member.alternativeAddresses |filter: {primary: false}">
+                            <div class="col-xs-2">{{alternative.email}}</div>
+                            <div class="col-xs-1">
+                                <button class="btn btn-xs" ng-click="makePrimary(alternative)">Make primary</button>
+                            </div>
+                            <div class="col-xs-1">
+                                <button class="btn btn-danger btn-xs" ng-click="removeEmail(alternative)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <ng-form class="form-inline">
@@ -39,7 +45,7 @@
                                 <input id="newEmail" ng-model="newEmail" type="email" class="form-control"
                                        placeholder="eMail address">
                             </div>
-                            <button class="btn" ng-click="moveAddress()">
+                            <button class="btn" ng-click="addEmail()">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 Add
                             </button>

@@ -25,12 +25,50 @@ membershipManager.controller('MemberEditController', [
             $location.path("/showMembers");
         };
 
-        $scope.moveAddress = function () {
+        $scope.addEmail = function () {
+            var newEmail = $scope.newEmail;
             if ($scope.member.alternativeAddresses == null) {
                 $scope.member.alternativeAddresses = [];
             }
             $scope.$applyAsync(function () {
-                $scope.member.alternativeAddresses.push({email: $scope.newEmail});
+                var alternativeAddresses = $scope.member.alternativeAddresses;
+                var found = false;
+                angular.forEach(alternativeAddresses, function (alt) {
+                    if (alt.email == newEmail) {
+                        found = true;
+                    }
+                });
+                if (!found) {
+                    alternativeAddresses.push({email: newEmail, primary: false});
+                }
             });
-        }
+        };
+
+        $scope.makePrimary = function (altEmail) {
+            var oldPrimary = $scope.member.emailAddress;
+
+            $scope.member.emailAddress = altEmail.email;
+            altEmail.primary = true;
+
+            var alternativeAddresses = $scope.member.alternativeAddresses;
+            var found = false;
+            angular.forEach(alternativeAddresses, function (alt) {
+                if (alt.email == oldPrimary) {
+                    alt.primary = false;
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                alternativeAddresses.push({email: oldPrimary, primary: false});
+            }
+        };
+
+        $scope.removeEmail = function (altEmail) {
+            var alternativeAddresses = $scope.member.alternativeAddresses;
+            var index = alternativeAddresses.indexOf(altEmail);
+            alternativeAddresses.splice(index, 1);
+        };
+
+
     }]);
