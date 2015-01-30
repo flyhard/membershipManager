@@ -1,11 +1,9 @@
-package com.abich;
+package com.abich.resources;
 
-import com.abich.core.EmailAddress;
-import com.abich.core.EmailAddressBuilder;
-import com.abich.core.Member;
-import com.abich.core.MemberBuilder;
+import com.abich.core.*;
 import com.abich.db.MemberRepository;
 import com.codahale.metrics.annotation.Timed;
+import io.dropwizard.auth.Auth;
 import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +17,7 @@ import java.util.Optional;
 @Path("/member")
 @Produces(MediaType.APPLICATION_JSON)
 public class MemberResource {
+
     public static final Logger LOGGER = LoggerFactory.getLogger(MemberResource.class);
 
     private final MemberRepository memberRepository;
@@ -30,20 +29,20 @@ public class MemberResource {
     @GET
     @Path("/{id}")
     @Timed
-    public Member getMember(@PathParam("id") String id) {
+    public Member getMember(@PathParam("id") String id, @Auth User user) {
         return memberRepository.get(id).get();
     }
 
     @GET
     @Timed
-    public List<Member> getMember() {
+    public List<Member> getMember(@Auth User user) {
         return memberRepository.getAll();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Timed
-    public Member createMember(@Valid Member member) {
+    public Member createMember(@Valid Member member, @Auth User user) {
         if (member.getId() != null && memberRepository.contains(member.getId())) {
             Member orgMember = memberRepository.get(member.getId()).get();
             MemberBuilder memberBuilder = new MemberBuilder()
@@ -70,7 +69,7 @@ public class MemberResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @Timed
-    public Member editMember(@Valid Member member, @PathParam("id") String id) {
+    public Member editMember(@Valid Member member, @PathParam("id") String id, @Auth User user) {
         boolean newMember = false;
         if (member.getId() != null && memberRepository.contains(id)) {
             newMember = false;
@@ -98,7 +97,8 @@ public class MemberResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @Timed
-    public void deleteMember(@PathParam("id") String id) {
+    public void deleteMember(@PathParam("id") String id, @Auth User user) {
         memberRepository.delete(id);
     }
+
 }

@@ -13,6 +13,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="app.js"></script>
     <script src="services/MemberService.js"></script>
+    <script src="services/UserService.js"></script>
     <script src="controllers/MemberListController.js"></script>
     <script src="controllers/MemberEditController.js"></script>
 </head>
@@ -34,7 +35,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: isActive('/addMember')}"><a href="#/addMember">Add member <span class="sr-only">(current)</span></a>
+                <li ng-class="{active: isActive('/addMember')}" ng-show="{privileges:isMemberAdmin}"><a
+                        href="#/addMember">Add member <span
+                        class="sr-only">(current)</span></a>
                 </li>
                 <li ng-class="{active: isActive('/showMembers')}"><a href="#/showMembers">Show members</a></li>
             </ul>
@@ -48,6 +51,5 @@
 </nav>
 
 <div ng-view></div>
-
 </body>
 </html>

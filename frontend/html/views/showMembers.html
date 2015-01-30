@@ -14,7 +14,10 @@
             </tr>
             <tr ng-repeat="member in members|orderBy: ['name','phone']">
                 <td class="hidden">{{member._id}}</td>
-                <td><a ng-click="editMember(member)">{{member.name}}</a></td>
+                <td><a ng-click="editMember(member)" ng-show="{privileges:isMemberAdmin}">{{member.name}}</a>
+
+                    <div ng-hide="{privileges:isMemberAdmin}">{{member.name}}</div>
+                </td>
                 <td>{{member.phone}}</td>
                 <td>{{member.emailAddress}}</td>
                 <td>

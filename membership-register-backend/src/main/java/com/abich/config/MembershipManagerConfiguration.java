@@ -12,6 +12,10 @@ public class MembershipManagerConfiguration extends Configuration {
     @NotNull
     private DbConfigurationServiceFactory db;
 
+    @Valid
+    @NotNull
+    private String adminUsername, adminPassword;
+
     public MembershipManagerConfiguration() {
     }
 
@@ -23,5 +27,15 @@ public class MembershipManagerConfiguration extends Configuration {
     @JsonProperty("db")
     public void setDbConfigurationServiceFactory(final DbConfigurationServiceFactory dbConfigurationServiceFactory) {
         this.db = dbConfigurationServiceFactory;
+    }
+
+    @JsonProperty("adminPassword")
+    public String getAdminPassword() {
+        return adminPassword;
+    }
+
+    @JsonProperty("adminUsername")
+    public String getAdminUsername() {
+        return adminUsername;
     }
 }
