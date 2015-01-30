@@ -18,6 +18,10 @@ membershipManager.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/addMember.html',
             controller: 'MemberEditController'
         })
+        .when("/addPayment/:id", {
+            templateUrl: 'views/addPayment.html',
+            controller: 'PaymentEditController'
+        })
         .otherwise({
             redirectTo: '/showMembers'
         });

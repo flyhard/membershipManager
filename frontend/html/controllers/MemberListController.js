@@ -8,6 +8,10 @@ membershipManager.controller('MemberListController', ['$scope', 'MemberService',
         }
     );
 
+    $scope.addPayment = function (member) {
+        $location.path("/addPayment/" + member._id);
+    };
+
     $scope.removeMember = function (member) {
         MemberService.removeMember(member)
             .then(function () {

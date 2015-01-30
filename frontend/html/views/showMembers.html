@@ -12,7 +12,7 @@
                 <th>other eMail adresses</th>
                 <th></th>
             </tr>
-            <tr ng-repeat="member in members|orderBy: ['name','phone']">
+            <tr ng-repeat="member in members|orderBy: ['name','phone']" ng-show="{privileges:mayListMembers}">
                 <td class="hidden">{{member._id}}</td>
                 <td><a ng-click="editMember(member)" ng-show="{privileges:isMemberAdmin}">{{member.name}}</a>
 
@@ -27,7 +27,11 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger" ng-click="removeMember(member)">
-                        <i class="glyphicon glyphicon-trash"></i>
+                        <i class="glyphicon glyphicon-trash"></i><span class="sr-only">Remove member</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-show="{privileges:isPaymentAdmin}"
+                            ng-click="addPayment(member)">
+                        <i class="glyphicon glyphicon-usd"></i><span class="sr-only">Register payment</span>
                     </button>
                 </td>
             </tr>

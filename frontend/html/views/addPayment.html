@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Add payment
+    </div>
+    <div class="panel-body">
+        <form ng-submit="save(member)">
+            <fieldset>
+                <legend>Payment data</legend>
+                <div class="form-group">
+                    <label for="paymentDate">Payment date</label>
+                    <input id="paymentDate" type="date" class="form-control" ng-model="payment.date"
+                           data-toggle="tooltip" data-placement="bottom"
+                           title="The date of the payment as per the bankstatement">
+                </div>
+                <div class="form-group">
+                    <label for="membershipYear">Payment for year</label>
+                    <input id="membershipYear" type="number" class="form-control" ng-model="payment.year" disabled>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="savePayment()"><i
+                        class="glyphicon glyphicon-plus"></i>
+                    Save
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>

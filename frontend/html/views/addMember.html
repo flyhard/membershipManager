@@ -2,7 +2,7 @@
     <div class="panel-heading">
         Add member
     </div>
-    <div class="panel-body">
+    <div class="panel-body" ng-show="{privileges:isMemberAdmin}">
         <form ng-submit="save(member)">
             <fieldset>
                 <legend>Member data</legend>
